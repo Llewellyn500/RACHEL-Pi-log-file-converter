@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request as flask_request, Response
+from flask import Flask, render_template, request as flask_request, Response, flash, redirect, url_for, send_file
 import csv
 import re
 from urllib.parse import unquote
@@ -6,15 +6,20 @@ from user_agents import parse
 from io import StringIO, BytesIO
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+
+log_data = []  # Initialize log_data at the top-level scope
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    global log_data  # Use the global log_data
+
     if flask_request.method == 'POST':
         uploaded_file = flask_request.files['file']
 
         if uploaded_file.filename != '':
             lines = uploaded_file.read().decode('utf-8').splitlines()
-            log_data = []
+            log_data = []  # Reset log_data for each conversion
 
             for line in lines:
                 match = re.match(r'^(.*?) - - \[(.*?)\] "(.*?)" (\d+) (\d+) "(.*?)" "(.*?)"$', line)
@@ -48,13 +53,30 @@ def index():
             csv_writer.writerows(log_data)
 
             output_csv.seek(0)
-            return Response(
-                output_csv.getvalue(),
-                content_type='text/csv',
-                headers={'Content-Disposition': 'attachment; filename=output.csv'}
-            )
+            flash('File converted successfully!', 'success')
+            return redirect(url_for('complete'))
 
     return render_template('index.html')
+
+@app.route('/complete')
+def complete():
+    return render_template('complete.html')
+
+@app.route('/download_csv')
+def download_csv():
+    global log_data  # Use the global log_data
+
+    output_csv = StringIO()
+    csv_writer = csv.writer(output_csv)
+    csv_writer.writerow(['IP Address', 'Timestamp', 'Path to Item Viewed', 'Status Code', 'Item Size (Byte)', 'Path to Site Visited', 'Device Used', 'Browser Used'])
+    csv_writer.writerows(log_data)  # Make sure log_data is available here
+
+    output_csv.seek(0)
+    return Response(
+        output_csv.getvalue(),
+        content_type='text/csv',
+        headers={'Content-Disposition': 'attachment; filename=output.csv'}
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

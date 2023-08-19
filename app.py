@@ -75,7 +75,7 @@ def download_csv():
     return Response(
         output_csv.getvalue(),
         content_type='text/csv',
-        headers={'Content-Disposition': 'attachment; filename=output.csv'}
+        headers={'Content-Disposition': 'attachment; filename=Rachel_log.csv'}
     )
 
 if __name__ == '__main__':

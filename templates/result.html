@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Results</title>
+</head>
+<body>
+    <h1>Analysis Results</h1>
+    <table>
+        <tr>
+            <th>IP Address</th>
+            <th>Timestamp</th>
+            <th>Item Paths</th>
+            <th>Status Code</th>
+            <th>Response Size</th>
+            <th>Site Paths</th>
+            <th>Device Type</th>
+            <th>Browser</th>
+        </tr>
+        {% for entry in log_data %}
+        <tr>
+            <td>{{ entry[0] }}</td>
+            <td>{{ entry[1] }}</td>
+            <td>{{ entry[2] }}</td>
+            <td>{{ entry[3] }}</td>
+            <td>{{ entry[4] }}</td>
+            <td>{{ entry[5] }}</td>
+            <td>{{ entry[6] }}</td>
+            <td>{{ entry[7] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="{{ url_for('download_csv') }}">Download CSV</a></p>
+</body>
+</html>

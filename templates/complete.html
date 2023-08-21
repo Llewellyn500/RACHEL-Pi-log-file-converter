@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <link rel="stylesheet" href="/static/css/complete.css" />
     <title>Download CSV</title>
-</head>
-<body>
-    <h1>Download Rachel-Pi CSV</h1>
-    <p>File conversion done successfully.</p>
-    
-    <p>What would you like to do next?</p>
-    <a href="{{ url_for('download_csv') }}">Download Converted CSV</a><br>
-    <a href="{{ url_for('index') }}">Convert Another File</a>
-</body>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Download Rachel-Pi CSV</h1>
+      <p class="note-info">File conversion done successfully.</p>
+      <p class="note">What would you like to do next?</p>
+      <div class="link">
+        <a href="{{ url_for('download_csv') }}"
+          >Download Converted CSV</a
+        >
+      </div>
+      <div class="link">
+        <a href="{{ url_for('index') }}">Convert Another File</a>
+      </div>
+    </div>
+  </body>
 </html>

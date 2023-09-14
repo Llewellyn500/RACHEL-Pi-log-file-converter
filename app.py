@@ -7,7 +7,6 @@ from io import StringIO
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
 
 log_data = []  # Initialize log_data at the top-level scope
 
@@ -52,16 +51,18 @@ def index():
                         device_type = 'Android'
                     elif user_agent.os.family == 'iOS':
                         device_type = 'iOS'
+                    elif user_agent.os.family == 'Chrome OS':
+                        device_type = 'Chrome OS'
                     else:
-                        device_type = 'Other'
+                        device_type = '-'
 
-                    browser_name = user_agent.browser.family
+                    browser_name = user_agent.browser.family if user_agent.browser.family else '-'
 
                     log_data.append([ip_address, timestamp, module_name, status_code, response_size, device_type, browser_name])
 
             output_csv = StringIO()
             csv_writer = csv.writer(output_csv)
-            csv_writer.writerow(['IP Address', 'Timestamp (DD/MM/YYYY HH:MM)', 'Module Viewed', 'Status Code', 'Item Size (Byte)', 'Device Used', 'Browser Used'])
+            csv_writer.writerow(['IP Address', 'Timestamp (DD/MM/YYYY HH:MM)', 'Module Viewed', 'Status Code', 'Viewed Module Data Size (Byte)', 'Device Used', 'Browser Used'])
             csv_writer.writerows(log_data)
 
             output_csv.seek(0)
@@ -89,7 +90,7 @@ def download_csv():
 
     output_csv = StringIO()
     csv_writer = csv.writer(output_csv)
-    csv_writer.writerow(['IP Address', 'Timestamp (DD/MM/YYYY HH:MM)', 'Module Viewed', 'Status Code', 'Item Size (Byte)', 'Device Used', 'Browser Used'])
+    csv_writer.writerow(['IP Address', 'Timestamp (DD/MM/YYYY HH:MM)', 'Module Viewed', 'Status Code', 'Viewed Module Data Size (Byte)', 'Device Used', 'Browser Used'])
     csv_writer.writerows(log_data)  # Make sure log_data is available here
 
     output_csv.seek(0)

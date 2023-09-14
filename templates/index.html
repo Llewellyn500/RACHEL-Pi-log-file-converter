@@ -89,14 +89,17 @@
   </head>
   <body>
     <div class="container">
+      <img class="logo" src="../static/images/logo.jpg" alt="logo" />
       <h1 class="title">Rachel-Pi Log Converter</h1>
       <p class="note">
-        Upload your Rachel-Pi log file. (File should be in a .txt format)
+        Upload your Rachel-Pi log file. (No files are stored on the server.)
       </p>
       <form method="POST" enctype="multipart/form-data">
         <input class="pick_file" type="file" name="file" />
         <input class="convert" type="submit" value="Convert and Download" />
       </form>
+      <p class="note">
+        <a href="https://github.com/Llewellyn500/RACHEL-Pi-log-file-converter" target="_blank">View the source code on GitHub</a>
     </div>
   </body>
 </html>

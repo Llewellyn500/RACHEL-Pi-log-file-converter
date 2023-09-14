@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request as flask_request, Response, flash, redirect, url_for, send_file
+from flask import Flask, render_template, request as flask_request, Response, flash, redirect, url_for, session
 import csv
 import re
 from urllib.parse import unquote
 from user_agents import parse
-from io import StringIO, BytesIO
+from io import StringIO
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -18,6 +18,7 @@ def index():
         uploaded_file = flask_request.files['file']
 
         if uploaded_file.filename != '':
+            input_filename = uploaded_file.filename  # Get the input file name
             lines = uploaded_file.read().decode('utf-8').splitlines()
             log_data = []  # Reset log_data for each conversion
 
@@ -54,17 +55,26 @@ def index():
 
             output_csv.seek(0)
             flash('File converted successfully!', 'success')
+            
+            # Store the input filename in the session
+            session['input_filename'] = input_filename
+            
             return redirect(url_for('complete'))
 
     return render_template('index.html')
 
 @app.route('/complete')
 def complete():
-    return render_template('complete.html')
+    # Retrieve the input filename from the session
+    input_filename = session.get('input_filename', 'unknown_filename')
+    return render_template('complete.html', input_filename=input_filename)
 
 @app.route('/download_csv')
 def download_csv():
     global log_data  # Use the global log_data
+    
+    # Retrieve the input filename from the session
+    input_filename = session.get('input_filename', 'unknown_filename')
 
     output_csv = StringIO()
     csv_writer = csv.writer(output_csv)
@@ -75,7 +85,7 @@ def download_csv():
     return Response(
         output_csv.getvalue(),
         content_type='text/csv',
-        headers={'Content-Disposition': 'attachment; filename=Rachel_log.csv'}
+        headers={'Content-Disposition': f'attachment; filename={input_filename}.csv'}  # Use input filename for output
     )
 
 if __name__ == '__main__':

@@ -5,6 +5,12 @@
 <h1 align="center">Rachel-Pi Log Converter</h1>
 
 <!-- Badges -->
+<p align="center">
+<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/llewellyn500/RACHEL-Pi-log-file-converter?style=for-the-badge&logo=github&label=GitHub%20Stars&color=white">
+<img alt="GitHub watchers" src="https://img.shields.io/github/watchers/llewellyn500/RACHEL-Pi-log-file-converter?style=for-the-badge&logo=github&label=GitHub%20Watchers&color=white">
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/llewellyn500/RACHEL-Pi-log-file-converter?style=for-the-badge&logo=github&label=Last%20Commit&color=white">
+</p>
+
 
 <div align="center">
   <a href="https://rachel-pi-log-converter.azurewebsites.net/">Preview</a>

@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://rachel-pi-log-converter.azurewebsites.net/">
-<img src="./static/images/logo.jpg" width="170px" alt="logo"></a>
+<img src="./static/images/logo.png" width="170px" alt="logo"></a>
 </p>
 <h1 align="center">Rachel-Pi Log Converter</h1>
 

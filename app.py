@@ -7,6 +7,7 @@ from io import StringIO
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
 
 log_data = []  # Initialize log_data at the top-level scope
 

@@ -7,11 +7,11 @@
 <!-- Badges -->
 
 <div align="center">
-  <a href="#">Preview</a>
+  <a href="https://rachel-pi-log-converter.azurewebsites.net/">Preview</a>
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-  <a href="#contributing">Contribution</a>
+  <a href="./CODE_OF_CONDUCT.md">Contribution</a>
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-  <a href="#license">License</a>
+  <a href="./LICENSE.md">License</a>
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
   <a href="#donations">Donation</a>
   <br />
@@ -75,11 +75,11 @@ python app.py
 
 ## Contributing
 
-Refer to the [Contributing.md](#) guide to start contributing to Rachel-Pi Log Converter.
+Refer to the [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) guide to start contributing to Rachel-Pi Log Converter.
 
 ## License
 
-Refer to the [License.md](#) page for information about licensing.
+Refer to the [License.md](./LICENSE.md) page for information about licensing.
 
 ## Donations
 Refer to the [Donations.md](#) page for information about donations.

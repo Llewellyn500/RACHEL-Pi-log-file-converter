@@ -34,17 +34,18 @@ The preview site is quite slow when you have a lot of log files you need to proc
 ### Installing
 1. Clone the repository
 ```
-$ git clone https://github.com/Llewellyn500/RACHEL-Pi-log-file-converter.git
-
-$ cd RACHEL-Pi-log-file-converter
+git clone https://github.com/Llewellyn500/RACHEL-Pi-log-file-converter.git
+```
+```
+cd RACHEL-Pi-log-file-converter
 ```
 2. Install the required packages
 ```
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 3. Run the application
 ```
-$ python app.py
+python app.py
 ```
 4. Open the application in your browser
 ```http://localhost:5000```

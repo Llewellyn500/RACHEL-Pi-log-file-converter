@@ -26,6 +26,9 @@ body {
 .note {
   margin-top: 40px;
 }
+.sm{
+  font-size: 10px;
+}
 .note a{
   text-align: center;
   font-size: 20px;
@@ -150,6 +153,9 @@ body {
     text-align: center;
     font-size: 15px;
   }
+  .sm{
+    font-size: 10px;
+  }
   .note-info {
     text-align: center;
     font-size: 15px;
@@ -221,6 +227,9 @@ body {
     .note {
       text-align: center;
       font-size: 15px;
+    }
+    .sm{
+      font-size: 10px;
     }
     .pick_file {
       background-color: #1d1e20;

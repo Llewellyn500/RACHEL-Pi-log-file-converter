@@ -26,10 +26,10 @@ def index():
             for line in lines:
                 match = re.match(r'^(.*?) - - \[(.*?)\] "(.*?)" (\d+) (\d+) "(.*?)" "(.*?)"$', line)
                 if match:
-                    ip_address, timestamp, request, status_code, response_size, _, user_agent_string = match.groups()
+                    ip_address, timestamp, request, status_code, response_size_bytes, _, user_agent_string = match.groups()
 
                     # Parse the timestamp into the desired format
-                    timestamp = datetime.strptime(timestamp, "%d/%b/%Y:%H:%M:%S %z").strftime("%Y-%m-%d %H:%M")
+                    timestamp = datetime.strptime(timestamp, "%d/%b/%Y:%H:%M:%S %z").strftime("%Y-%m-%d")
 
                     path_to_modules = re.sub(r'^GET (.*) HTTP/1.1$', r'\1', request)
                     decoded_path = unquote(path_to_modules)
@@ -40,7 +40,7 @@ def index():
                     if module_name_match:
                         module_name = module_name_match.group(1)
                     else:
-                        module_name = '-'
+                        module_name = 'unknown'
 
                     user_agent = parse(user_agent_string)
 
@@ -55,15 +55,18 @@ def index():
                     elif user_agent.os.family == 'Chrome OS':
                         device_type = 'Chrome OS'
                     else:
-                        device_type = '-'
+                        device_type = 'unknown'
 
-                    browser_name = user_agent.browser.family if user_agent.browser.family else '-'
+                    browser_name = user_agent.browser.family if user_agent.browser.family else 'unknown'
 
-                    log_data.append([ip_address, timestamp, module_name, status_code, response_size, device_type, browser_name])
+                    # Convert response size from bytes to Gigabytes
+                    response_size_gb = format(int(response_size_bytes) / 1073741824, ".5f") 
+
+                    log_data.append([ip_address, timestamp, module_name, status_code, response_size_gb, device_type, browser_name])
 
             output_csv = StringIO()
             csv_writer = csv.writer(output_csv)
-            csv_writer.writerow(['IP Address', 'Timestamp (DD/MM/YYYY HH:MM)', 'Module Viewed', 'Status Code', 'Viewed Module Data Size (Byte)', 'Device Used', 'Browser Used'])
+            csv_writer.writerow(['IP Address', 'Date (YYYY-MM-DD)', 'Module Viewed', 'Status Code', 'Data Saved (GB)', 'Device Used', 'Browser Used'])
             csv_writer.writerows(log_data)
 
             output_csv.seek(0)
@@ -91,7 +94,7 @@ def download_csv():
 
     output_csv = StringIO()
     csv_writer = csv.writer(output_csv)
-    csv_writer.writerow(['IP Address', 'Timestamp (DD/MM/YYYY HH:MM)', 'Module Viewed', 'Status Code', 'Viewed Module Data Size (Byte)', 'Device Used', 'Browser Used'])
+    csv_writer.writerow(['IP Address', 'Date (YYYY-MM-DD)', 'Module Viewed', 'Status Code', 'Data Saved (GB)', 'Device Used', 'Browser Used'])
     csv_writer.writerows(log_data)  # Make sure log_data is available here
 
     output_csv.seek(0)

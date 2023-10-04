@@ -40,7 +40,7 @@ def index():
                     if module_name_match:
                         module_name = module_name_match.group(1)
                     else:
-                        module_name = 'unknown'
+                        module_name = 'none'
 
                     user_agent = parse(user_agent_string)
 

@@ -66,7 +66,7 @@ def index():
 
             output_csv = StringIO()
             csv_writer = csv.writer(output_csv)
-            csv_writer.writerow(['IP Address', 'Date (YYYY-MM-DD)', 'Module Viewed', 'Status Code', 'Data Saved (GB)', 'Device Used', 'Browser Used'])
+            csv_writer.writerow(['IP Address', 'Date', 'Module Viewed', 'Status Code', 'Data Saved (GB)', 'Device Used', 'Browser Used'])
             csv_writer.writerows(log_data)
 
             output_csv.seek(0)
@@ -94,7 +94,7 @@ def download_csv():
 
     output_csv = StringIO()
     csv_writer = csv.writer(output_csv)
-    csv_writer.writerow(['IP Address', 'Date (YYYY-MM-DD)', 'Module Viewed', 'Status Code', 'Data Saved (GB)', 'Device Used', 'Browser Used'])
+    csv_writer.writerow(['IP Address', 'Date', 'Module Viewed', 'Status Code', 'Data Saved (GB)', 'Device Used', 'Browser Used'])
     csv_writer.writerows(log_data)  # Make sure log_data is available here
 
     output_csv.seek(0)
